@@ -1,0 +1,56 @@
+<html>
+  <body></body>
+</html>
+<script src="ball.js"></script>
+<script src="movement.js"></script>
+
+<script>
+  var rightEdge = window.innerWidth - 90;
+  var bottomEdge = window.innerHeight - 90;
+  const leftEdge = -10;
+  const topEdge = -10;
+  
+  const numBall = 3;
+  var ballList = createAllBallObjects(numBall)
+// YOUR CODE 
+// ----------------
+
+function createAllBallObjects(numBall) {
+  let ballList = []
+  for (let index = 0; index < numBall; index++) {
+    ballList.push(createBall(index));
+  }
+  return ballList;
+}
+
+function addBall(){
+  let index = ballList.length;
+  ballList.push(createBall(index))
+}
+
+function modifyColor(ball, div) {
+  var r = Math.floor(255*(Math.random()));
+  var g = Math.floor(255*(Math.random()));
+  var b = Math.floor(255*(Math.random()));        
+  var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  div.style.background = color;
+  ball.nearEdge = false;
+}
+
+function updateEdges() {
+  rightEdge = window.innerWidth - 90;
+  bottomEdge = window.innerHeight - 90;
+}
+
+function render() {
+
+  for (const ball of ballList) {
+    var div = document.getElementById(ball.id);
+    updateEdges(ball);
+    setEdges(ball);
+    move2D(ball, div);
+  }
+}
+
+setInterval(render, 10);
+</script>
